@@ -10,7 +10,7 @@ RUN localedef -f UTF-8 -i ja_JP ja_JP.UTF-8
 
 # epel
 RUN rpm --import http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
-RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
+RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
 
 # remi
 RUN rpm -ivh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
@@ -59,10 +59,12 @@ RUN su - app -c 'cd /home/app/dotfiles && sh setup.sh'
 
 # ruby
 RUN yum remove ruby
-RUN yum -y install libyaml
-ADD ruby-2.1.3-2.el7.centos.x86_64.rpm /tmp/ruby-2.1.3-2.el7.centos.x86_64.rpm
-RUN rpm -ihv /tmp/ruby-2.1.3-2.el7.centos.x86_64.rpm
-RUN rm /tmp/ruby-2.1.3-2.el7.centos.x86_64.rpm
+RUN yum -y install libyaml openssl
+
+ENV RUBY_RPM ruby-2.2.0-1.el7.centos.x86_64.rpm
+ADD ${RUBY_RPM} /tmp/
+RUN rpm -ihv /tmp/${RUBY_RPM}
+RUN rm /tmp/${RUBY_RPM}
 RUN gem install bundler
 
 ADD start.sh /start.sh
