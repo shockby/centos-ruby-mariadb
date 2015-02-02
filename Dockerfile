@@ -40,10 +40,6 @@ RUN sed -ri 's/#UsePAM no/UsePAM no/g' /etc/ssh/sshd_config
 RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
 RUN ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N ''
 
-# bower
-RUN yum install -y nodejs npm
-RUN npm install -g bower
-
 # mariadb
 RUN yum install -y mariadb mariadb-server mariadb-devel
 RUN mysql_install_db --user=mysql --ldata=/var/lib/mysql/
