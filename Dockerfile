@@ -31,7 +31,7 @@ RUN chown -R app:app /home/app/.ssh
 RUN yum -y install sendmail
 
 # dev package
-RUN yum install -y bind-utils tar make libxml2-devel libxslt-devel libcurl-devel ImageMagick-devel
+RUN yum install -y gcc gcc-c++ bind-utils tar make libxml2-devel libxslt-devel libcurl-devel ImageMagick-devel
 
 # ssh
 RUN yum -y install openssh-server
